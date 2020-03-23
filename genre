@@ -1,0 +1,50 @@
+
+
+void show_all_genres(struct Library library)
+{
+    int count=0;
+    struct book *ptr;
+    
+    printf("\n\t**GENRE LIST**\n\n");
+    if(library.start!=NULL)
+    {
+        ptr=library.start;
+        while(ptr!=NULL)
+        {   
+            count++;
+            printf("%d.",count);
+            printf("%s\n",ptr->genre);
+            ptr=ptr->next;
+        }
+    }
+}
+
+void displaybook(struct book *ptr,int count)
+{ 
+    printf("\n\n%d.",count);
+    printf("\tBook code:%d",ptr->book_code);
+    printf("\nName:%s",ptr->name_of_book);
+    printf("\tAuthor:%s",ptr->name_of_author);
+    printf("\tCopies:%d\n",ptr->copies);
+     
+}
+
+void display_genrebooks(struct Library *library)
+{
+    struct book *ptr;
+    char select_genre[20];
+    show_all_genres(*library);
+    printf("\nEnter your preferred genre:");
+    scanf("%s",select_genre);
+    ptr=library->start;
+    int count=0;
+    while(ptr!=NULL)
+    {
+        if(strcmp(select_genre,ptr->genre)==0)
+        {
+            count++;
+            displaybook(ptr,count);
+        }
+        ptr=ptr->next;
+    }
+}
